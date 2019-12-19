@@ -1,44 +1,18 @@
-package br.com.tarifa.entity;
+package br.com.tarifa.controller.request;
 
-import br.com.tarifa.controller.request.CriarAgendamentosRequest;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity(name = "Agendamentos")
-public class Agendamentos {
+public class CriarAgendamentosRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String usuario;
     private String contaOrigem;
     private String contaDestino;
     private double valor;
     private LocalDate dtTransferencia;
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate dtAgendamento;
-
-    public  Agendamentos(){}
-
-    public Agendamentos(CriarAgendamentosRequest criarAgendamentosRequest) {
-        this.usuario = criarAgendamentosRequest.getUsuario();
-        this.contaOrigem = criarAgendamentosRequest.getContaOrigem();
-        this.contaDestino = criarAgendamentosRequest.getContaDestino();
-        this.valor = criarAgendamentosRequest.getValor();
-        this.dtTransferencia = LocalDate.now();
-        this.dtAgendamento = criarAgendamentosRequest.getDtAgendamento();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsuario() {
         return usuario;
