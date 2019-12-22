@@ -4,21 +4,27 @@ import br.com.tarifa.controller.request.CriarAgendamentosRequest;
 import br.com.tarifa.controller.response.CriarAgendamentosResponse;
 import br.com.tarifa.entity.Agendamentos;
 import br.com.tarifa.repository.AgendamentosRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+
 @Service
-public class AgendamentosService implements AgendamentoServiceImpl{
+public class AgendamentosServiceImpl implements AgendamentoService {
 
-    private final AgendamentosRepository agendamentosRepository;
+    private AgendamentosRepository agendamentosRepository;
 
-    public AgendamentosService(AgendamentosRepository agendamentosRepository) {
+    @Autowired
+    public AgendamentosServiceImpl(AgendamentosRepository agendamentosRepository) {
         this.agendamentosRepository = agendamentosRepository;
     }
 
-    public CriarAgendamentosResponse agendarTransferencia(CriarAgendamentosRequest agendamentosRequest){
+
+    @Override
+    public CriarAgendamentosResponse agendarTransferencia(@NotNull CriarAgendamentosRequest agendamentosRequest){
         CriarAgendamentosResponse criarAgendamentosResponse = new CriarAgendamentosResponse();
         Long qtdDias = ChronoUnit.DAYS.between(LocalDate.now(),agendamentosRequest.getDtAgendamento());
         if( qtdDias < 0){
@@ -48,11 +54,4 @@ public class AgendamentosService implements AgendamentoServiceImpl{
         }
         return criarAgendamentosResponse;
     }
-
-
-    public void salvar(Agendamentos agendamentos) {
-        agendamentosRepository.save(agendamentos);
-    }
-
-
 }

@@ -1,6 +1,10 @@
 package br.com.tarifa.entity;
 
 import br.com.tarifa.controller.request.CriarAgendamentosRequest;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@Component
 @Entity(name = "Agendamentos")
 public class Agendamentos {
 
@@ -21,8 +29,6 @@ public class Agendamentos {
     private LocalDate dtTransferencia;
     private LocalDate dtAgendamento;
 
-    public  Agendamentos(){}
-
     public Agendamentos(CriarAgendamentosRequest criarAgendamentosRequest) {
         this.usuario = criarAgendamentosRequest.getUsuario();
         this.contaOrigem = criarAgendamentosRequest.getContaOrigem();
@@ -30,61 +36,5 @@ public class Agendamentos {
         this.valor = criarAgendamentosRequest.getValor();
         this.dtTransferencia = LocalDate.now();
         this.dtAgendamento = criarAgendamentosRequest.getDtAgendamento();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContaOrigem() {
-        return contaOrigem;
-    }
-
-    public void setContaOrigem(String contaOrigem) {
-        this.contaOrigem = contaOrigem;
-    }
-
-    public String getContaDestino() {
-        return contaDestino;
-    }
-
-    public void setContaDestino(String contaDestino) {
-        this.contaDestino = contaDestino;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public LocalDate getDtTransferencia() {
-        return dtTransferencia;
-    }
-
-    public void setDtTransferencia(LocalDate dtTransferencia) {
-        this.dtTransferencia = dtTransferencia;
-    }
-
-    public LocalDate getDtAgendamento() {
-        return dtAgendamento;
-    }
-
-    public void setDtAgendamento(LocalDate dtAgendamento) {
-        this.dtAgendamento = dtAgendamento;
     }
 }
